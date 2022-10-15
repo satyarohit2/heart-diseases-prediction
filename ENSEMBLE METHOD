@@ -1,0 +1,26 @@
+model1 = DecisionTreeClassifier()
+model2= KMeans()
+model3= LogisticRegression()
+
+model1.fit(x_train,y_train)
+model2.fit(x_train,y_train)
+model3.fit(x_train,y_train)
+
+pred1=model1.predict(x_test)
+pred2=model2.predict(x_test)
+pred3=model3.predict(x_test)
+
+final_pred = np.array([])
+for i in range(0,len(x_test)):
+    final_pred = np.append(final_pred, pd.Series. mode ([pred1[i], pred2[i], pred3[i]]))
+ from sklearn.ensemble import VotingClassifier
+model1 = LogisticRegression(random_state=1)
+model2 = DecisionTreeClassifier(random_state=1)
+model = VotingClassifier(estimators=[('lr', model1), ('dt', model2)], voting='hard')
+model.fit(x_train,y_train)
+model.score(x_test,y_test)
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+scaler.fit(x_train)
+X_train = scaler.transform(x_train)
+X_test = scaler.transform(x_test)
