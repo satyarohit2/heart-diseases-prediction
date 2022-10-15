@@ -1,0 +1,13 @@
+
+
+from sklearn.svm import SVC
+svc_model = SVC(random_state = 10)
+svc_model.fit(x_train, y_train)
+y_pred = svc_model.predict(x_test)
+print("The test accuracy score of SVM is:", accuracy_score(y_test, y_pred))
+scores = cross_val_score(svc_model, x_test, y_test, cv = 10)
+print("Cross-Validation Accuracy Scores", scores.mean())
+plot_roc_curve(svc_model, x_test, y_test, name = "Support Vector Machine")
+plt.title("Support Vector Machine Roc Curve And AUC")
+plt.plot([0, 1], [0, 1], "r--")
+plt.show()
