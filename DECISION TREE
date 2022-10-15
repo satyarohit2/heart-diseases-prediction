@@ -1,0 +1,11 @@
+from sklearn.tree import DecisionTreeClassifier
+dec_tree = DecisionTreeClassifier(random_state = 10)
+dec_tree.fit(x_train, y_train)
+y_pred = dec_tree.predict(x_test)
+print("The test accuracy score of Decision Tree is:", accuracy_score(y_test, y_pred))
+scores = cross_val_score(dec_tree, x_test, y_test, cv = 10)
+print("Cross-Validation Accuracy Scores", scores.mean())
+plot_roc_curve(dec_tree, x_test, y_test, name = "Decision Tree")
+plt.title("Decision Tree Roc Curve And AUC")
+plt.plot([0, 1], [0, 1], "r--")
+plt.show()
