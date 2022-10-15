@@ -1,0 +1,13 @@
+import numpy as np 
+import pandas as pd
+import warnings
+warnings.filterwarnings("ignore")
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+df=pd.read_csv("/content/sample_data/heart.csv")
+df.head()
+df.columns
+df.shape
+df.info
+df.isnull().sum()
