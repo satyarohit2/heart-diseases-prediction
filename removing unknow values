@@ -1,0 +1,19 @@
+isnull_number = []
+for i in df.columns:
+    x = df[i].isnull().sum()
+    isnull_number.append(x)
+    
+pd.DataFrame(isnull_number, index = df.columns, columns = ["Total Missing Values"])
+df.head()
+df["cp"].value_counts()
+df["cp"].value_counts().sum()
+df["cp"].value_counts().count()
+unique_number = []
+for i in df.columns:
+    x = df[i].value_counts().count()
+    unique_number.append(x)
+    
+pd.DataFrame(unique_number, index = df.columns, columns = ["Total Unique Values"])
+numeric_var = ["age", "trtbps", "chol", "thalachh", "oldpeak"]
+categoric_var = ["sex", "cp", "fbs", "rest_ecg", "exang", "slope", "ca", "thal", "target"]
+df[numeric_var].describe()
