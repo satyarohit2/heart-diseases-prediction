@@ -1,0 +1,29 @@
+from sklearn.ensemble import RandomForestClassifier
+random_forest = RandomForestClassifier(random_state = 5)
+random_forest.fit(x_train, y_train)
+y_pred = random_forest.predict(x_test)
+print("The test accuracy score of Random Forest is", accuracy_score(y_test, y_pred))
+scores = cross_val_score(random_forest, x_test, y_test, cv = 10)
+print("Cross-Validation Accuracy Scores", scores.mean())
+plot_roc_curve(random_forest, x_test, y_test, name = "Random Forest")
+plt.title("Random Forest Roc Curve And AUC")
+plt.plot([0, 1], [0, 1], "r--")
+plt.show()
+\\HYPER PARAMETERS OPTIMIZATION\\
+random_forest_new = RandomForestClassifier(random_state = 5)
+random_forest_new
+parameters = {"n_estimators" : [50, 100, 150, 200], 
+              "criterion" : ["gini", "entropy"], 
+              'max_features': ['auto', 'sqrt', 'log2'], 
+              'bootstrap': [True, False]}
+random_forest_grid = GridSearchCV(random_forest_new, param_grid = parameters)
+random_forest_grid.fit(x_train, y_train)
+print("Best Parameters:", random_forest_grid.best_params_)
+random_forest_new2 = RandomForestClassifier(bootstrap = True, criterion = "entropy", max_features = "auto", n_estimators = 200, random_state = 5)
+random_forest_new2.fit(x_train, y_train)
+y_pred = random_forest_new2.predict(x_test)
+print("The test accuracy score of Random Forest after hyper-parameter tuning is:", accuracy_score(y_test, y_pred))
+plot_roc_curve(random_forest_new2, x_test, y_test, name = "Random Forest")
+plt.title("Random Forest Roc Curve And AUC")
+plt.plot([0, 1], [0, 1], "r--")
+plt.show()              
