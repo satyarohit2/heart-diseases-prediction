@@ -1,0 +1,41 @@
+numeric_var
+numeric_axis_name = ["Age of the Patient", "Resting Blood Pressure", "Cholesterol", "Maximum Heart Rate Achieved", "ST Depression"]
+list(zip(numeric_var, numeric_axis_name))
+// eda approache on sysmptoms  of the patients\\
+title_font = {"family" : "arial", "color" : "darkred", "weight" : "bold", "size" : 15}
+axis_font = {"family" : "arial", "color" : "darkblue", "weight" : "bold", "size" : 13}
+
+for i, z in list(zip(numeric_var, numeric_axis_name)):
+    plt.figure(figsize = (8, 6), dpi = 80)
+    sns.distplot(df[i], hist_kws = dict(linewidth = 1, edgecolor = "k"), bins = 20)
+    
+    plt.title(i, fontdict = title_font)
+    plt.xlabel(z, fontdict = axis_font)
+    plt.ylabel("Density", fontdict = axis_font)
+    
+    plt.tight_layout()
+    plt.show()
+    
+    categoric_var
+    
+categoric_axis_name = ["Gender", "Chest Pain Type", "Fasting Blood sugar", "Resting Electrocardiographic Results",
+                      "Exercise Induced Angina", "The Slope of ST Segment", "Number of Major Vessels", "Thal", "Target"]
+                      list(zip(categoric_var, categoric_axis_name))
+df["cp"].value_counts()
+list(df["cp"].value_counts())
+list(df["cp"].value_counts().index)  
+title_font = {"family" : "arial", "color" : "darkred", "weight" : "bold", "size" : 15}
+axis_font = {"family" : "arial", "color" : "darkblue", "weight" : "bold", "size" : 13}
+
+for i, z in list(zip(categoric_var, categoric_axis_name)):
+    fig, ax = plt.subplots(figsize = (8, 6))
+    
+    observation_values = list(df[i].value_counts().index)
+    total_observation_values = list(df[i].value_counts())
+    
+    ax.pie(total_observation_values, labels= observation_values, autopct = '%1.1f%%', startangle = 110, labeldistance = 1.1)
+    ax.axis("equal") # Equal aspect ratio ensures that pie is drawn as a circle.
+    
+    plt.title((i + "(" + z + ")"), fontdict = title_font) # Naming Pie Chart Titles
+    plt.legend()
+    plt.show()
