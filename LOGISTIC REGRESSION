@@ -1,0 +1,37 @@
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+log_reg = LogisticRegression()
+log_reg
+log_reg.fit(x_train, y_train)
+y_pred = log_reg.predict(x_test)
+y_pred
+
+accuracy = accuracy_score(y_test, y_pred)
+print("Test Accuracy: {}".format(accuracy))
+\\CROSS VALIDATION \\
+from sklearn.model_selection import cross_val_score
+scores = cross_val_score(log_reg, x_test, y_test, cv = 10)
+print("Cross-Validation Accuracy Scores", scores.mean())
+\\ROC CURVE\\
+from sklearn.metrics import plot_roc_curve
+plot_roc_curve(log_reg, x_test, y_test, name = "Logistic Regression")
+plt.title("Logistic Regression Roc Curve And AUC")
+plt.plot([0, 1], [0, 1], "r--")
+plt.show()
+\\GRID SEARCH CV\\
+from sklearn.model_selection import GridSearchCV
+log_reg_new = LogisticRegression()
+log_reg_new
+parameters = {"penalty":["l1","l2"], "solver" : ['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga']}
+log_reg_grid = GridSearchCV(log_reg_new, param_grid = parameters)
+log_reg_grid.fit(x_train, y_train)
+print("Best Parameters: ", log_reg_grid.best_params_)
+log_reg_new2 = LogisticRegression(penalty = "l1", solver = "saga")
+log_reg_new2
+log_reg_new2.fit(x_train, y_train)
+y_pred = log_reg_new2.predict(x_test)
+print("The test accuracy score of Logistic Regression After hyper-parameter tuning is: {}".format(accuracy_score(y_test, y_pred)))
+plot_roc_curve(log_reg_new2, x_test, y_test, name = "Logistic Regression GridSearchCV")
+plt.title("Logistic Regression GridSearchCV Roc Curve And AUC")
+plt.plot([0, 1], [0, 1], "r--")
+plt.show()
